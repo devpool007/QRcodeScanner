@@ -8,7 +8,7 @@ void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     ));
-
+var qrcodes = ["http://l.ead.me/bb5BmP","http://l.ead.me/bb5CWZ"];
 class HomePage extends StatefulWidget {
   @override
   HomePageState createState() {
@@ -17,13 +17,21 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  String result = "Hey there !";
-
+  String result = "VIP SCANNER";
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
-        result = qrResult;
+        if(qrcodes.contains(qrResult)){
+          result = "SUCCESS";
+          qrcodes.remove(qrResult);  
+        }
+        else{
+          //Text("SCAN UNSUCCESSFUL" ,textAlign: TextAlign.center, style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold,color: Color.fromRGBO(243, 56, 60,1)));
+          result = "SCAN FAILED :(";
+
+        }
+        //result = qrResult;
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
@@ -55,8 +63,8 @@ class HomePageState extends State<HomePage> {
       body: Center(
         child: Text(
           result,
-          style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-        ),
+          style: new TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold,color: Color.fromRGBO(48, 150, 243,1))
+        ), 
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.camera_alt),
@@ -64,6 +72,7 @@ class HomePageState extends State<HomePage> {
         onPressed: _scanQR,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 }
