@@ -1,8 +1,12 @@
 # qr_code_scanner
 
-A new Flutter project.
+A new Flutter project. This is my first flutter project it is a custom made QR Scanner for a college event.
 
-## Getting Started
+**Features**
+It scans only a set of QR_codes and only scans them once to avoid plagiarism
+It is a very basic implementation if you wanna implement it to your event just enter the QR code urls int the list in main.dart file and run the project :)
+
+## Getting Started with Flutter
 
 This project is a starting point for a Flutter application.
 
